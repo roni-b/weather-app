@@ -1,9 +1,21 @@
-import supabase from './config/supabaseClient'
+// import supabase from './config/supabaseClient'
+// import { useState, useEffect } from 'react'
 
 const App = () => {
+  // const [fetchError, setFetchError] = useState(null)
+  // const [locations, setLocations] = useState(null)
+
+  // useEffect(() => {
+  //   const fetchLocations = async () => {
+  //     const { data, error } = await
+  //   }
+
+
+  // }, [])
+
   return (
-    <div>
-      <p>Hello world</p>
+    <div className='w3-container'>
+      <p>Sääsovellus</p>
     </div>
   )
 }
