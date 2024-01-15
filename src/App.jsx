@@ -2,7 +2,7 @@ import { useState } from 'react'
 import LocationInput from './components/LocationInput'
 import Weather from './components/Weather'
 import fetchData from './utils/fetchData'
-import { openWeather } from './utils/useApi'
+// import { openWeather } from './utils/useApi'
 
 const App = () => {
   const [errorMessage, setErrorMessage] = useState(null)
@@ -17,8 +17,8 @@ const App = () => {
 
   const handleSubmit = async (countryInput) => {
     try {
-      const data = await fetchData(`https://api.openweathermap.org/geo/1.0/direct?q=${countryInput}&appid=${openWeather}`)
-      console.log(data)
+      const api = process.env.WEATHER_API
+      const data = await fetchData(`https://api.openweathermap.org/geo/1.0/direct?q=${countryInput}&appid=${api}`)
       setCoordinates([data[0].lat, data[0].lon])
     } catch (error) {
       setCoordinates(null)
