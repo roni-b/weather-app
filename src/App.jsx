@@ -1,21 +1,35 @@
-// import supabase from './config/supabaseClient'
-// import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import CountryInput from './components/CountryInput'
+import Weather from './components/Weather'
+import fetchData from './utils/fetchData'
 
 const App = () => {
-  // const [fetchError, setFetchError] = useState(null)
-  // const [locations, setLocations] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
+  const [coordinates, setCoordinates] = useState(null)
 
-  // useEffect(() => {
-  //   const fetchLocations = async () => {
-  //     const { data, error } = await
-  //   }
+  const handleErrors = (error, setErrorMessage, timeout = 5000) => {
+    setErrorMessage(error.message)
+    setTimeout(() => {
+      setErrorMessage(null)
+    }, timeout)
+  }
 
-
-  // }, [])
+  const handleSubmit = async (countryInput) => {
+    try {
+      const data = await fetchData(`https://restcountries.com/v3.1/name/${countryInput}`)
+      setCoordinates(data[0].latlng)
+    } catch (error) {
+      setCoordinates(null)
+      handleErrors(error, setErrorMessage)
+    }
+  }
 
   return (
     <div className='w3-container'>
-      <p>Sääsovellus</p>
+      <h3>Sääsovellus</h3>
+      <p className='w3-text-red'>{errorMessage}</p>
+      <CountryInput onSubmit={handleSubmit} />
+      <Weather coordinates={coordinates} />
     </div>
   )
 }
