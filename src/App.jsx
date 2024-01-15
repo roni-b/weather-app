@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react'
-import CountryInput from './components/CountryInput'
+import { useState } from 'react'
+import LocationInput from './components/LocationInput'
 import Weather from './components/Weather'
 import fetchData from './utils/fetchData'
+import { openWeather } from './utils/useApi'
 
 const App = () => {
   const [errorMessage, setErrorMessage] = useState(null)
@@ -16,8 +17,9 @@ const App = () => {
 
   const handleSubmit = async (countryInput) => {
     try {
-      const data = await fetchData(`https://restcountries.com/v3.1/name/${countryInput}`)
-      setCoordinates(data[0].latlng)
+      const data = await fetchData(`https://api.openweathermap.org/geo/1.0/direct?q=${countryInput}&appid=${openWeather}`)
+      console.log(data)
+      setCoordinates([data[0].lat, data[0].lon])
     } catch (error) {
       setCoordinates(null)
       handleErrors(error, setErrorMessage)
@@ -28,7 +30,7 @@ const App = () => {
     <div className='w3-container'>
       <h3>Sääsovellus</h3>
       <p className='w3-text-red'>{errorMessage}</p>
-      <CountryInput onSubmit={handleSubmit} />
+      <LocationInput onSubmit={handleSubmit} />
       <Weather coordinates={coordinates} />
     </div>
   )

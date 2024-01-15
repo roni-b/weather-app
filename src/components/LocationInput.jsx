@@ -1,23 +1,23 @@
 import { useState } from "react"
 import PropTypes from 'prop-types'
 
-const CountryInput = ({ onSubmit }) => {
-  const [countryInput, setCountryInput] = useState('')
+const LocationInput = ({ onSubmit }) => {
+  const [locationInput, setLocationInput] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    onSubmit(countryInput)
+    onSubmit(locationInput)
   };
 
   return (
     <form method="post" onSubmit={handleSubmit}>
       <label>
-        Syötä maa:
+        Syötä kaupunki:
         <input
           type='text'
           name='countryInputField'
-          value={countryInput || ''}
-          onChange={(e) => setCountryInput(e.target.value)}
+          value={locationInput || ''}
+          onChange={(e) => setLocationInput(e.target.value)}
         />
       </label>
       <button type='submit'>Hae sää</button>
@@ -25,7 +25,7 @@ const CountryInput = ({ onSubmit }) => {
   )
 }
 
-CountryInput.propTypes = {
+LocationInput.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 }
-export default CountryInput
+export default LocationInput
