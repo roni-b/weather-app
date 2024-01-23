@@ -3,11 +3,19 @@ import LocationInput from './components/LocationInput'
 import Weather from './components/Weather'
 import fetchData from './utils/fetchData'
 // import { openWeather } from './utils/useApi'
-import './App.css';
 
 const App = () => {
   const [errorMessage, setErrorMessage] = useState(null)
   const [coordinates, setCoordinates] = useState(null)
+
+  const styles = {
+    backgroundColor: '#f2f2f2',
+    borderRadius: '10px',
+    padding: '20px',
+    margin: '20px',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+    fontFamily: 'Roboto, sans-serif',
+  }
 
   const handleErrors = (error, setErrorMessage, timeout = 5000) => {
     setErrorMessage(error.message)
@@ -28,7 +36,7 @@ const App = () => {
   }
 
   return (
-    <div className='container'>
+    <div style={styles}>
       <h3>Sääsovellus</h3>
       <p className='error-text'>{errorMessage}</p>
       <LocationInput onSubmit={handleSubmit} />
