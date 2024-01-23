@@ -3,6 +3,7 @@ import LocationInput from './components/LocationInput'
 import Weather from './components/Weather'
 import fetchData from './utils/fetchData'
 // import { openWeather } from './utils/useApi'
+import './App.css';
 
 const App = () => {
   const [errorMessage, setErrorMessage] = useState(null)
@@ -27,9 +28,9 @@ const App = () => {
   }
 
   return (
-    <div className='w3-container'>
+    <div className='container'>
       <h3>Sääsovellus</h3>
-      <p className='w3-text-red'>{errorMessage}</p>
+      <p className='error-text'>{errorMessage}</p>
       <LocationInput onSubmit={handleSubmit} />
       <Weather coordinates={coordinates} />
     </div>

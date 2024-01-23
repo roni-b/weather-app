@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import PropTypes from 'prop-types'
 import fetchData from "../utils/fetchData"
 // import { openWeather } from "../utils/useApi"
+import './WeatherCard.css';
 
 const Weather = ({ coordinates }) => {
   const [weatherData, setWeatherData] = useState(null)
@@ -29,8 +30,21 @@ const Weather = ({ coordinates }) => {
   }
 
   return (
-    <div>
-      {JSON.stringify(weatherData, null, 2)}
+    <div className="weather-card">
+      {weatherData ? (
+        <>
+        <h1>{weatherData.name}</h1>
+        <div className="temperature">
+          <h1>{weatherData.main.temp}</h1>
+          <img src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`} width={80} alt={'weather icon'}></img>
+        </div>
+        <h3>Tuntuu {weatherData.main.feels_like}</h3>
+        <h3>Tuuli {weatherData.wind.speed} m/s</h3>
+        <p>Säätiedot: OpenWeatherMap</p>
+        </>
+      ) : (
+        <p>Ladataan säätietoja...</p>
+      )}
     </div>
   )
 }
